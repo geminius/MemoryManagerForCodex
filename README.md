@@ -32,3 +32,15 @@ codex mem:add <Section> --id <id> --tags <tag1,tag2> --text "content" [--scope p
 
 The command acquires a lock while writing, redacts obvious secrets, and prints a
 unified diff of the changes before committing them.
+
+## Codex Memory Update
+
+Existing memories can be modified with the `mem:update` command:
+
+```bash
+codex mem:update <id> --text "new content" [--tags tag1,tag2] [--scope project|global|module]
+```
+
+The command shows a unified diff of the changes and requires confirmation before
+overwriting the entry. The text is redacted for obvious secrets, and an
+`updated` timestamp is recorded.

@@ -9,9 +9,9 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
 - [x] **Add**: Implement `codex mem:add <Section> --id <id> --tags <tags> --text <text>`.
   - [x] Write to CODEX.md with dry-run diff, lock file, and secret redaction.
   - [x] **Tests**: Verify diff output, lock enforcement on concurrent writes, redaction, and successful append.
-- [ ] **Update**: Implement `codex mem:update <id> --text <text> [--tags <tags>]`.
-  - [ ] Apply in-place edit via patch with confirmation.
-  - [ ] **Tests**: Confirm fields are updated correctly and diff is shown before write.
+- [x] **Update**: Implement `codex mem:update <id> --text <text> [--tags <tags>]`.
+  - [x] Apply in-place edit via patch with confirmation.
+  - [x] **Tests**: Confirm fields are updated correctly and diff is shown before write.
 - [ ] **Delete**: Implement `codex mem:delete <id> [--yes]`.
   - [ ] Mark entry archived with `ttl: "0d"` or remove on confirmation.
   - [ ] **Tests**: Verify deletion behavior with and without `--yes` flag.

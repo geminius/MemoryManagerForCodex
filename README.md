@@ -44,3 +44,37 @@ codex mem:update <id> --text "new content" [--tags tag1,tag2] [--scope project|g
 The command shows a unified diff of the changes and requires confirmation before
 overwriting the entry. The text is redacted for obvious secrets, and an
 `updated` timestamp is recorded.
+
+## Codex Memory Delete
+
+Entries can be archived using the `mem:delete` command which marks the entry with
+`ttl: "0d"`:
+
+```bash
+codex mem:delete <id> [--scope project|global|module] [--yes]
+```
+
+Without `--yes` the command will prompt for confirmation before writing the
+change.
+
+## Codex Memory Compact
+
+Expired entries and excess snippets can be removed with `mem:compact`:
+
+```bash
+codex mem:compact [--scope project|global|module] [--max-snippets N]
+```
+
+Entries with `ttl: "0d"` are purged and the file is trimmed to at most
+`N` snippets.
+
+## Codex Memory Lint
+
+The `mem:lint` command validates `CODEX.md` for structural issues:
+
+```bash
+codex mem:lint [--scope project|global|module]
+```
+
+It reports malformed YAML, duplicate ids, missing sections, and files exceeding
+200 lines.

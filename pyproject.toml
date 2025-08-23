@@ -1,0 +1,11 @@
+[project]
+name = "codex"
+version = "0.1.0"
+dependencies = [
+    "click",
+    "PyYAML",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -105,3 +105,25 @@ Additional helpers operate on code across the workspace:
 - `codex code:hotset add <path> --reason "why"` tracks important files in `HOTSET.md`.
 - `codex code:snip <path[:L1-L2]>` saves a snippet into `SNIPPETS/`.
 - `codex code:compact` prunes snippets older than 30 days.
+
+## MCP Methods
+
+The `codex.mcp` module provides programmatic access to the same features as the
+CLI. These functions operate on the project workspace and can be used from
+Python code:
+
+```python
+from codex import mcp
+entries = mcp.mem_search({"q": "hello"})
+mcp.mem_add({"section": "Project Facts", "entry": {"id": "a1", "text": "Hi"}})
+mcp.mem_update({"id": "a1", "patch": {"text": "Updated"}})
+mcp.mem_delete({"id": "a1", "confirm": True})
+mcp.mem_task_bind({"id": "T1"})
+mcp.mem_task_checkpoint({"note": "did something", "next": ["next step"]})
+mcp.code_edges_refresh()
+mcp.code_symbols_refresh()
+mcp.code_snip({"path": "file.py", "start": 1, "end": 5})
+```
+
+The functions return Python data structures or file paths, enabling integration
+with other tooling or editors.

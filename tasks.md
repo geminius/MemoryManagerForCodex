@@ -67,9 +67,9 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
   - [x] **Tests**: Validate snippet path and content range.
 
 ## Shared Utilities & Testing
-- [ ] Implement CODEX.md parser and writer per schema.
-  - [ ] **Tests**: Malformed YAML, duplicate ids, TTL handling, performance (≤5ms on 200 lines).
-- [ ] Implement redaction filter for emails, API keys, tokens.
-  - [ ] **Tests**: Ensure sensitive strings are removed before write.
-- [ ] Setup continuous integration with `pytest` running all test suites.
+- [x] Implement CODEX.md parser and writer per schema.
+  - [x] **Tests**: Malformed YAML, duplicate ids, TTL handling, performance (≤5ms on 200 lines).
+- [x] Implement redaction filter for emails, API keys, tokens.
+  - [x] **Tests**: Ensure sensitive strings are removed before write.
+- [x] Setup continuous integration with `pytest` running all test suites.
 

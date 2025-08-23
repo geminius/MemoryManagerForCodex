@@ -37,24 +37,27 @@ def tokenize(s: str) -> List[str]:
 
 
 RE_EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+RE_API_KEY = re.compile(r"sk-[A-Za-z0-9]{16,}")
 RE_SECRET = re.compile(r"[A-Za-z0-9]{20,}")
 
 
 def redact(text: str) -> str:
-    """Redact obvious secrets like emails and long tokens."""
+    """Redact obvious secrets like emails, API keys, and long tokens."""
     text = RE_EMAIL.sub("<redacted:email>", text)
+    text = RE_API_KEY.sub("<redacted:api_key>", text)
     text = RE_SECRET.sub("<redacted:secret>", text)
     return text
 
 
 def load_codex_entries(path: Path) -> List[Entry]:
-    """Parse CODEX.md into entries."""
+    """Parse CODEX.md into entries with validation."""
     entries: List[Entry] = []
     if not path.exists():
         return entries
 
     lines = path.read_text().splitlines()
     section: Optional[str] = None
+    seen_ids: set[str] = set()
     i = 0
     while i < len(lines):
         line = lines[i].rstrip()
@@ -75,21 +78,50 @@ def load_codex_entries(path: Path) -> List[Entry]:
                     continue
                 entry_lines.append(next_line)
                 i += 1
-            data = yaml.safe_load("\n".join(entry_lines))
-            if isinstance(data, list) and data:
-                raw = data[0]
-                entry = Entry(
-                    id=str(raw.get("id", "")),
-                    section=section or "",
-                    tags=[str(t) for t in raw.get("tags", [])],
-                    text=str(raw.get("text", "")),
-                    updated=raw.get("updated"),
-                    ttl=raw.get("ttl"),
-                )
-                entries.append(entry)
+            try:
+                data = yaml.safe_load("\n".join(entry_lines))
+            except yaml.YAMLError as exc:
+                raise ValueError("Malformed YAML") from exc
+            if not (isinstance(data, list) and data):
+                raise ValueError("Malformed entry")
+            raw = data[0]
+            entry = Entry(
+                id=str(raw.get("id", "")),
+                section=section or "",
+                tags=[str(t) for t in raw.get("tags", [])],
+                text=str(raw.get("text", "")),
+                updated=raw.get("updated"),
+                ttl=raw.get("ttl"),
+            )
+            if entry.id in seen_ids:
+                raise ValueError(f"Duplicate id: {entry.id}")
+            seen_ids.add(entry.id)
+            if entry.ttl == "0d":
+                continue
+            entries.append(entry)
         else:
             i += 1
     return entries
+
+
+def write_codex_entries(path: Path, entries: List[Entry]) -> None:
+    """Write entries back to a CODEX.md file."""
+    sections: Dict[str, List[Entry]] = {}
+    for e in entries:
+        sections.setdefault(e.section, []).append(e)
+
+    lines: List[str] = ["# CODEX Memory", ""]
+    for section, items in sections.items():
+        lines.append(f"## {section}")
+        for e in items:
+            data = {"id": e.id, "tags": e.tags, "text": e.text}
+            if e.updated:
+                data["updated"] = e.updated
+            if e.ttl:
+                data["ttl"] = e.ttl
+            lines.append(yaml.safe_dump([data], sort_keys=False).strip())
+        lines.append("")
+    path.write_text("\n".join(lines).rstrip() + "\n")
 
 
 def score_entry(entry: Entry, query_tokens: Iterable[str]) -> float:
@@ -112,7 +144,7 @@ def score_entry(entry: Entry, query_tokens: Iterable[str]) -> float:
 
 
 def search_codex(path: Path, query: str, k: int = 5) -> List[Entry]:
-    entries = [e for e in load_codex_entries(path) if e.ttl != "0d"]
+    entries = load_codex_entries(path)
     tokens = tokenize(query)
     scored = [
         (score_entry(e, tokens), e) for e in entries

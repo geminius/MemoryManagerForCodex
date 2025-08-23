@@ -127,3 +127,14 @@ mcp.code_snip({"path": "file.py", "start": 1, "end": 5})
 
 The functions return Python data structures or file paths, enabling integration
 with other tooling or editors.
+
+## Utilities and Development
+
+The `codex.memory` module exposes helpers to load and write `CODEX.md` files
+with validation for malformed YAML, duplicate ids, and expired TTLs. Text that
+flows through the CLI is sanitized by a redaction filter that removes emails,
+API keys, and long random tokens.
+
+This repository also includes a GitHub Actions workflow that installs the
+package and runs the full test suite with `pytest` on every push and pull
+request.

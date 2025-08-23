@@ -6,9 +6,9 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
 - [x] **Search**: Implement `codex mem:search <query> [--scope <scope>] [--k <k>]` to query CODEX.md files.
   - [x] Build in-memory index from CODEX.md with weights and recency.
   - [x] **Tests**: Ensure search returns expected entries by section, honors scope/k limits, and handles missing files gracefully.
-- [ ] **Add**: Implement `codex mem:add <Section> --id <id> --tags <tags> --text <text>`.
-  - [ ] Write to CODEX.md with dry-run diff, lock file, and secret redaction.
-  - [ ] **Tests**: Verify diff output, lock enforcement on concurrent writes, redaction, and successful append.
+- [x] **Add**: Implement `codex mem:add <Section> --id <id> --tags <tags> --text <text>`.
+  - [x] Write to CODEX.md with dry-run diff, lock file, and secret redaction.
+  - [x] **Tests**: Verify diff output, lock enforcement on concurrent writes, redaction, and successful append.
 - [ ] **Update**: Implement `codex mem:update <id> --text <text> [--tags <tags>]`.
   - [ ] Apply in-place edit via patch with confirmation.
   - [ ] **Tests**: Confirm fields are updated correctly and diff is shown before write.

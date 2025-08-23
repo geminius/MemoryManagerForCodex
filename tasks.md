@@ -21,30 +21,30 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
    - [x] **Tests**: Cover malformed front matter, duplicate ids, and over‑200‑line files.
 
 ## CLI - Task Commands
-- [ ] **Bind**: Implement `codex mem:task bind <ID>` to set active task and create journal file.
-  - [ ] **Tests**: Verify binding creates `.codex/tasks/<ID>.md` and updates CODEX shard.
-- [ ] **Checkpoint**: Implement `codex mem:task checkpoint "<note>"`.
-  - [ ] **Tests**: Append note to task journal with timestamp.
-- [ ] **Next**: Implement `codex mem:task next "<bullets>"` to record next steps.
-  - [ ] **Tests**: Ensure bullets are written and preserved across sessions.
-- [ ] **Sync**: Implement `codex mem:task sync` to reconcile task shard in CODEX.md with journal.
-  - [ ] **Tests**: Detect drift and update accordingly.
-- [ ] **Complete**: Implement `codex mem:task complete` to mark task done and archive journal.
-  - [ ] **Tests**: Journal is archived and task status updated.
+- [x] **Bind**: Implement `codex mem:task bind <ID>` to set active task and create journal file.
+  - [x] **Tests**: Verify binding creates `.codex/tasks/<ID>.md` and updates CODEX shard.
+- [x] **Checkpoint**: Implement `codex mem:task checkpoint "<note>"`.
+  - [x] **Tests**: Append note to task journal with timestamp.
+- [x] **Next**: Implement `codex mem:task next "<bullets>"` to record next steps.
+  - [x] **Tests**: Ensure bullets are written and preserved across sessions.
+- [x] **Sync**: Implement `codex mem:task sync` to reconcile task shard in CODEX.md with journal.
+  - [x] **Tests**: Detect drift and update accordingly.
+- [x] **Complete**: Implement `codex mem:task complete` to mark task done and archive journal.
+  - [x] **Tests**: Journal is archived and task status updated.
 
 ## CLI - Cross-Repo / Code Commands
-- [ ] **Search**: Implement `codex xrepo:search <regex> [--repos list]` using ripgrep across workspace repos.
-  - [ ] **Tests**: Stub ripgrep calls and confirm correct repo set.
-- [ ] **Edges Refresh**: Implement `codex code:edges refresh` to rebuild `EDGES.md` digest.
-  - [ ] **Tests**: Ensure file generated and contains expected links.
-- [ ] **Symbols Refresh**: Implement `codex code:symbols refresh` to regenerate `SYMBOLS.md` via ctags.
-  - [ ] **Tests**: Verify symbols are parsed and stored.
-- [ ] **Hotset Add**: Implement `codex code:hotset add <path> [--reason <...>]` to mark important files.
-  - [ ] **Tests**: File is appended with reason and deduplicated.
-- [ ] **Snip**: Implement `codex code:snip <path[:L1-L2]>` to capture code snippets into `SNIPPETS/`.
-  - [ ] **Tests**: Snippet saved with correct line numbers and reference.
-- [ ] **Compact**: Implement `codex code:compact` to prune old digests/snippets.
-  - [ ] **Tests**: Old digests are removed and metrics logged.
+- [x] **Search**: Implement `codex xrepo:search <regex> [--repos list]` using ripgrep across workspace repos.
+  - [x] **Tests**: Stub ripgrep calls and confirm correct repo set.
+- [x] **Edges Refresh**: Implement `codex code:edges refresh` to rebuild `EDGES.md` digest.
+  - [x] **Tests**: Ensure file generated and contains expected links.
+- [x] **Symbols Refresh**: Implement `codex code:symbols refresh` to regenerate `SYMBOLS.md` via ctags.
+  - [x] **Tests**: Verify symbols are parsed and stored.
+- [x] **Hotset Add**: Implement `codex code:hotset add <path> [--reason <...>]` to mark important files.
+  - [x] **Tests**: File is appended with reason and deduplicated.
+- [x] **Snip**: Implement `codex code:snip <path[:L1-L2]>` to capture code snippets into `SNIPPETS/`.
+  - [x] **Tests**: Snippet saved with correct line numbers and reference.
+- [x] **Compact**: Implement `codex code:compact` to prune old digests/snippets.
+  - [x] **Tests**: Old digests are removed and metrics logged.
 
 ## MCP Methods
 - [ ] **mem.search**: Expose search as `mem.search({q, scope?, k?})`.

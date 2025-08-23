@@ -78,3 +78,30 @@ codex mem:lint [--scope project|global|module]
 
 It reports malformed YAML, duplicate ids, missing sections, and files exceeding
 200 lines.
+
+## Task Commands
+
+The CLI can track active tasks and record progress notes:
+
+```bash
+codex mem:task bind TASKID
+codex mem:task checkpoint "did something"
+codex mem:task next "bullet one;bullet two"
+codex mem:task sync
+codex mem:task complete
+```
+
+Binding creates a journal under `.codex/tasks/` and a matching entry in
+`CODEX.md`. Notes and next steps are appended to the journal, `sync` updates the
+memory entry, and `complete` archives the task.
+
+## Cross-Repo and Code Commands
+
+Additional helpers operate on code across the workspace:
+
+- `codex xrepo:search <regex> --repos repo1,repo2` runs ripgrep across multiple repositories.
+- `codex code:edges refresh` rebuilds an `EDGES.md` file from markdown links.
+- `codex code:symbols refresh` regenerates `SYMBOLS.md` using ctags output.
+- `codex code:hotset add <path> --reason "why"` tracks important files in `HOTSET.md`.
+- `codex code:snip <path[:L1-L2]>` saves a snippet into `SNIPPETS/`.
+- `codex code:compact` prunes snippets older than 30 days.

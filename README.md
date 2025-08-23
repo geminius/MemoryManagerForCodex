@@ -38,11 +38,11 @@ unified diff of the changes before committing them.
 Existing memories can be modified with the `mem:update` command:
 
 ```bash
-codex mem:update <id> --text "new content" [--tags tag1,tag2] [--scope project|global|module]
+codex mem:update <id> --text "new content" [--tags tag1,tag2] [--scope project|global|module] [--yes]
 ```
 
 The command shows a unified diff of the changes and requires confirmation before
-overwriting the entry. The text is redacted for obvious secrets, and an
+overwriting the entry (use `--yes` for non-interactive runs). The text is redacted for obvious secrets, and an
 `updated` timestamp is recorded.
 
 ## Codex Memory Delete

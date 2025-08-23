@@ -34,8 +34,8 @@
 ## Agent & MCP Instructions
 - Non-interactive usage (agents):
   - Add: `codex mem:add "Guardrails" --id guard-1 --tags safety --text "Never run destructive migrations."`
-  - Update requires confirmation; pipe yes: `printf 'y\n' | codex mem:update guard-1 --text "Never drop prod tables."`.
-  - Delete supports `--yes`: `codex mem:delete guard-1 --yes`.
+  - Update (no prompt): `codex mem:update guard-1 --text "Never drop prod tables." --tags safety,db --yes`.
+  - Delete (no prompt): `codex mem:delete guard-1 --yes`.
 - MCP status: No native MCP server in this repo. If your host can expose shell tools, map MCP methods to CLI commands (e.g., `mem.search` → `codex mem:search`). The design doc outlines future MCP endpoints.
 
 ## Security & Configuration Tips

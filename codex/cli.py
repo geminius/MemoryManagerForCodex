@@ -98,7 +98,8 @@ def mem_add(section: str, id_: str, tags: str, text: str, scope: str) -> None:
 @click.option("--text", required=True)
 @click.option("--tags", default="", help="Comma-separated tags")
 @click.option("--scope", default="project", type=click.Choice(["project", "global", "module"]))
-def mem_update(id_: str, text: str, tags: str, scope: str) -> None:
+@click.option("--yes", is_flag=True, default=False, help="Confirm update without prompt")
+def mem_update(id_: str, text: str, tags: str, scope: str, yes: bool) -> None:
     """Update an existing entry in CODEX.md."""
     path = resolve_codex_path(scope)
     if not path.exists():
@@ -167,7 +168,7 @@ def mem_update(id_: str, text: str, tags: str, scope: str) -> None:
         )
     )
     click.echo(diff)
-    if click.confirm("Apply changes?", default=False):
+    if yes or click.confirm("Apply changes?", default=False):
         path.write_text(new_text)
     else:
         click.echo("Aborted")

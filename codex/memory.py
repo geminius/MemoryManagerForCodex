@@ -26,6 +26,7 @@ class Entry:
     tags: List[str]
     text: str
     updated: Optional[str] = None
+    ttl: Optional[str] = None
 
 
 TOKEN_RE = re.compile(r"\w+")
@@ -83,6 +84,7 @@ def load_codex_entries(path: Path) -> List[Entry]:
                     tags=[str(t) for t in raw.get("tags", [])],
                     text=str(raw.get("text", "")),
                     updated=raw.get("updated"),
+                    ttl=raw.get("ttl"),
                 )
                 entries.append(entry)
         else:
@@ -110,7 +112,7 @@ def score_entry(entry: Entry, query_tokens: Iterable[str]) -> float:
 
 
 def search_codex(path: Path, query: str, k: int = 5) -> List[Entry]:
-    entries = load_codex_entries(path)
+    entries = [e for e in load_codex_entries(path) if e.ttl != "0d"]
     tokens = tokenize(query)
     scored = [
         (score_entry(e, tokens), e) for e in entries

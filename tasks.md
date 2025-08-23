@@ -12,13 +12,13 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
 - [x] **Update**: Implement `codex mem:update <id> --text <text> [--tags <tags>]`.
   - [x] Apply in-place edit via patch with confirmation.
   - [x] **Tests**: Confirm fields are updated correctly and diff is shown before write.
-- [ ] **Delete**: Implement `codex mem:delete <id> [--yes]`.
-  - [ ] Mark entry archived with `ttl: "0d"` or remove on confirmation.
-  - [ ] **Tests**: Verify deletion behavior with and without `--yes` flag.
-- [ ] **Compact**: Implement `codex mem:compact` to remove expired entries and enforce max_snippets.
-  - [ ] **Tests**: Ensure TTL entries are removed and file stays under size limits.
-- [ ] **Lint**: Implement `codex mem:lint` to catch malformed YAML, duplicate ids, missing sections, or overlong files.
-  - [ ] **Tests**: Cover malformed front matter, duplicate ids, and over‑200‑line files.
+- [x] **Delete**: Implement `codex mem:delete <id> [--yes]`.
+   - [x] Mark entry archived with `ttl: "0d"` or remove on confirmation.
+   - [x] **Tests**: Verify deletion behavior with and without `--yes` flag.
+- [x] **Compact**: Implement `codex mem:compact` to remove expired entries and enforce max_snippets.
+   - [x] **Tests**: Ensure TTL entries are removed and file stays under size limits.
+- [x] **Lint**: Implement `codex mem:lint` to catch malformed YAML, duplicate ids, missing sections, or overlong files.
+   - [x] **Tests**: Cover malformed front matter, duplicate ids, and over‑200‑line files.
 
 ## CLI - Task Commands
 - [ ] **Bind**: Implement `codex mem:task bind <ID>` to set active task and create journal file.

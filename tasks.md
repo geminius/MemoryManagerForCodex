@@ -47,24 +47,24 @@ This file outlines implementation tasks for the Codex CLI and MCP, derived from 
   - [x] **Tests**: Old digests are removed and metrics logged.
 
 ## MCP Methods
-- [ ] **mem.search**: Expose search as `mem.search({q, scope?, k?})`.
-  - [ ] **Tests**: Unit tests for correct result format and scope handling.
-- [ ] **mem.add**: Expose add as `mem.add({scope, section, entry})`.
-  - [ ] **Tests**: Ensure returned id matches stored entry and redaction occurs.
-- [ ] **mem.update**: Expose update as `mem.update({scope, id, patch})`.
-  - [ ] **Tests**: Verify fields patched and diff confirmed.
-- [ ] **mem.delete**: Expose delete as `mem.delete({scope, id, confirm})`.
-  - [ ] **Tests**: Confirm deletion requires confirmation and archives entry.
-- [ ] **mem.task.bind**: Implement task binding via MCP.
-  - [ ] **Tests**: Journal created and active task recorded.
-- [ ] **mem.task.checkpoint**: Implement checkpoint with optional next steps.
-  - [ ] **Tests**: Note and next steps appended with timestamps.
-- [ ] **code.edges.refresh**: MCP method returning path to `EDGES.md`.
-  - [ ] **Tests**: Trigger digest rebuild and return correct path.
-- [ ] **code.symbols.refresh**: MCP method for `SYMBOLS.md`.
-  - [ ] **Tests**: Confirm symbols file generated.
-- [ ] **code.snip**: MCP method to extract snippet.
-  - [ ] **Tests**: Validate snippet path and content range.
+- [x] **mem.search**: Expose search as `mem.search({q, scope?, k?})`.
+  - [x] **Tests**: Unit tests for correct result format and scope handling.
+- [x] **mem.add**: Expose add as `mem.add({scope, section, entry})`.
+  - [x] **Tests**: Ensure returned id matches stored entry and redaction occurs.
+- [x] **mem.update**: Expose update as `mem.update({scope, id, patch})`.
+  - [x] **Tests**: Verify fields patched and diff confirmed.
+- [x] **mem.delete**: Expose delete as `mem.delete({scope, id, confirm})`.
+  - [x] **Tests**: Confirm deletion requires confirmation and archives entry.
+- [x] **mem.task.bind**: Implement task binding via MCP.
+  - [x] **Tests**: Journal created and active task recorded.
+- [x] **mem.task.checkpoint**: Implement checkpoint with optional next steps.
+  - [x] **Tests**: Note and next steps appended with timestamps.
+- [x] **code.edges.refresh**: MCP method returning path to `EDGES.md`.
+  - [x] **Tests**: Trigger digest rebuild and return correct path.
+- [x] **code.symbols.refresh**: MCP method for `SYMBOLS.md`.
+  - [x] **Tests**: Confirm symbols file generated.
+- [x] **code.snip**: MCP method to extract snippet.
+  - [x] **Tests**: Validate snippet path and content range.
 
 ## Shared Utilities & Testing
 - [ ] Implement CODEX.md parser and writer per schema.

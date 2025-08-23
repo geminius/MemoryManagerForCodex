@@ -3,9 +3,9 @@
 This file outlines implementation tasks for the Codex CLI and MCP, derived from `codex_local_memory_design_full.md`.
 
 ## CLI - Memory Commands
-- [ ] **Search**: Implement `codex mem:search <query> [--scope <scope>] [--k <k>]` to query CODEX.md files.
-  - [ ] Build in-memory index from CODEX.md with weights and recency.
-  - [ ] **Tests**: Ensure search returns expected entries by section, honors scope/k limits, and handles missing files gracefully.
+- [x] **Search**: Implement `codex mem:search <query> [--scope <scope>] [--k <k>]` to query CODEX.md files.
+  - [x] Build in-memory index from CODEX.md with weights and recency.
+  - [x] **Tests**: Ensure search returns expected entries by section, honors scope/k limits, and handles missing files gracefully.
 - [ ] **Add**: Implement `codex mem:add <Section> --id <id> --tags <tags> --text <text>`.
   - [ ] Write to CODEX.md with dry-run diff, lock file, and secret redaction.
   - [ ] **Tests**: Verify diff output, lock enforcement on concurrent writes, redaction, and successful append.

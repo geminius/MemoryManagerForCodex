@@ -31,3 +31,30 @@ def test_mem_update_patches_entry_with_confirmation():
         assert 'new' in content
         assert 'old' not in content
         assert 'updated:' in content
+
+
+def test_mem_update_yes_flag_skips_prompt():
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        Path('.codex').mkdir()
+        Path('.codex/CODEX.md').write_text('# CODEX Memory\n\n## Preferences\n- id: pref-one\n  tags: [t1]\n  text: "old"\n')
+        cmd = [
+            'mem:update',
+            'pref-one',
+            '--text', 'newer',
+            '--tags', 't3',
+            '--yes',
+        ]
+        result = runner.invoke(cli, cmd)
+        assert result.exit_code == 0
+        # should not prompt for confirmation
+        assert 'Apply changes?' not in result.output
+        # diff shows old and new text
+        assert '-  text: "old"' in result.output
+        assert '+  text: "newer"' in result.output
+        content = Path('.codex/CODEX.md').read_text()
+        assert 'pref-one' in content
+        assert 't3' in content
+        assert 'newer' in content
+        assert 'old' not in content
+        assert 'updated:' in content

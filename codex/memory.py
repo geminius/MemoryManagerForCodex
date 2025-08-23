@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Iterable, Optional
+from typing import Iterable, List, Dict, Optional
 
 import yaml
 
@@ -33,6 +33,17 @@ TOKEN_RE = re.compile(r"\w+")
 
 def tokenize(s: str) -> List[str]:
     return TOKEN_RE.findall(s.lower())
+
+
+RE_EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+RE_SECRET = re.compile(r"[A-Za-z0-9]{20,}")
+
+
+def redact(text: str) -> str:
+    """Redact obvious secrets like emails and long tokens."""
+    text = RE_EMAIL.sub("<redacted:email>", text)
+    text = RE_SECRET.sub("<redacted:secret>", text)
+    return text
 
 
 def load_codex_entries(path: Path) -> List[Entry]:

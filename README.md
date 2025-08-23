@@ -21,3 +21,14 @@ codex mem:search "query" [--scope project|global|module] [--k N]
 
 If no `CODEX.md` exists for the selected scope, the command prints a helpful
 message instead of failing.
+
+## Codex Memory Add
+
+You can append new memories to `CODEX.md` using the `mem:add` command:
+
+```bash
+codex mem:add <Section> --id <id> --tags <tag1,tag2> --text "content" [--scope project|global|module]
+```
+
+The command acquires a lock while writing, redacts obvious secrets, and prints a
+unified diff of the changes before committing them.

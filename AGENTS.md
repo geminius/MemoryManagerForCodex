@@ -5,7 +5,8 @@
 - `codex/memory.py`: Parsing, search, scoring, and redaction logic. Keep pure and testable.
 - `tests/`: Pytest tests using `click.testing.CliRunner` and `isolated_filesystem`.
 - `.codex/CODEX.md`: Project-scoped memory file created/edited by commands.
-- `codex_local_memory_design_full.md`: Design doc; some MCP ideas here are not yet implemented.
+- `codex/mcp.py`: Lightweight MCP-style helpers (functions like `mem_search`, `mem_add`, `mem_update`, etc.). Not a full MCP server.
+- `codex_local_memory_design_full.md`: Design doc; outlines fuller MCP/server plans.
 
 ## Build, Test, and Development Commands
 - Install (editable): `pip install -e .` (Python 3.9+).
@@ -36,7 +37,7 @@
   - Add: `codex mem:add "Guardrails" --id guard-1 --tags safety --text "Never run destructive migrations."`
   - Update (no prompt): `codex mem:update guard-1 --text "Never drop prod tables." --tags safety,db --yes`.
   - Delete (no prompt): `codex mem:delete guard-1 --yes`.
-- MCP status: No native MCP server in this repo. If your host can expose shell tools, map MCP methods to CLI commands (e.g., `mem.search` → `codex mem:search`). The design doc outlines future MCP endpoints.
+- MCP status: This repo provides helper functions in `codex/mcp.py` (not a networked server). If your host supports shell tools, map MCP methods to CLI commands (e.g., `mem.search` → `codex mem:search`), or import `codex.mcp` functions directly in a host plugin.
 
 ## Security & Configuration Tips
 - Memory files may contain sensitive text. The CLI redacts obvious emails/tokens; still avoid pasting secrets.

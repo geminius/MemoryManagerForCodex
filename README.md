@@ -138,3 +138,14 @@ API keys, and long random tokens.
 This repository also includes a GitHub Actions workflow that installs the
 package and runs the full test suite with `pytest` on every push and pull
 request.
+
+## Development Setup
+
+To work on the CLI locally:
+
+1. Create and activate a Python 3.9+ virtual environment.
+2. Install the package in editable mode with `pip install -e .`.
+3. Run the test suite using `pytest -q`.
+
+These steps mirror the continuous integration workflow and help ensure
+changes stay consistent with the published CLI behaviour.
